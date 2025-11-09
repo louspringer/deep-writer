@@ -82,6 +82,25 @@ make show-config      # print resolved MCP config with env placeholders
 
 ---
 
+## CC-SDD (Strap Spec Driven Development)
+This repo uses a local sibling installation of CC-SDD from `../cc-sdd`. A thin wrapper script is provided.
+
+Usage:
+```bash
+# Show help
+make cc-sdd-help
+
+# Run with your preferred agent/template
+make cc-sdd ARGS="--cursor --lang en --dry-run"
+```
+The wrapper script calls:
+```
+scripts/cc-sdd  # invokes ../cc-sdd/tools/cc-sdd/dist/cli.js
+```
+Ensure the sibling repo exists and is built.
+
+---
+
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
