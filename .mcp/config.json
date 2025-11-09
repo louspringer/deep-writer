@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "trace": { "enabled": true },
+  "servers": {
+    "deepwriter": {
+      "transport": "http", 
+      "baseUrl": "https://api.deepwriter.com/mcp", 
+      "headers": {
+        "Authorization": "Bearer ${DEEPWRITER_API_KEY}"
+      },
+      "metadata": {
+        "description": "DeepWriter MCP endpoint (placeholder URL)",
+        "docs": "https://docs.deepwriter.com/",
+        "requiresApiKey": true
+      }
+    }
+  }
+}

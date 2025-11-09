@@ -85,5 +85,3 @@ make show-config      # print resolved MCP config with env placeholders
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
