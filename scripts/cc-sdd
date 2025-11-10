@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Preferred: standard /kiro install
+# CC-SDD execution wrapper:
+# - KIRO_CLI: optional override to a specific CLI js file
+# - Default: use sibling repo's CLI (authoritative)
+
 NODE_BIN="${NODE_BIN:-node}"
-KIRO_CLI="/kiro/tools/cc-sdd/dist/cli.js"
+OVERRIDE_CLI="${KIRO_CLI:-}"
 SIBLING_CLI="/Volumes/lemon/cursor/cc-sdd/tools/cc-sdd/dist/cli.js"
 
-if [ -f "$KIRO_CLI" ]; then
-  exec "$NODE_BIN" "$KIRO_CLI" "$@"
-elif [ -f "$SIBLING_CLI" ]; then
-  echo "[warn] /kiro not found; using sibling CC-SDD at $SIBLING_CLI" >&2
-  exec "$NODE_BIN" "$SIBLING_CLI" "$@"
-else
-  echo "CC-SDD CLI not found." >&2
-  echo "Expected at: $KIRO_CLI" >&2
-  echo "Fallback at: $SIBLING_CLI" >&2
-  exit 1
+if [ -n "${OVERRIDE_CLI}" ] && [ -f "${OVERRIDE_CLI}" ]; then
+  exec "${NODE_BIN}" "${OVERRIDE_CLI}" "$@"
 fi
+
+if [ -f "${SIBLING_CLI}" ]; then
+  exec "${NODE_BIN}" "${SIBLING_CLI}" "$@"
+fi
+
+echo "CC-SDD CLI not found." >&2
+echo "Set KIRO_CLI to the CLI path or ensure sibling exists at:" >&2
+echo "  ${SIBLING_CLI}" >&2
+exit 1
 
 

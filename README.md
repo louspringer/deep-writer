@@ -83,9 +83,7 @@ make show-config      # print resolved MCP config with env placeholders
 ---
 
 ## CC-SDD (Strap Spec Driven Development)
-This repo expects the standard CC-SDD installation under `/kiro`. A thin wrapper is provided and will:
-- Prefer `/kiro/tools/cc-sdd/dist/cli.js`
-- Fallback to a sibling checkout at `../cc-sdd/tools/cc-sdd/dist/cli.js` (with a warning)
+This repo integrates CC-SDD using the sibling checkout (`../cc-sdd`) as the authoritative CLI source for terminal usage. In chat/IDE contexts the slash command is `/kiro/...` (not a filesystem path).
 
 Usage:
 ```bash
@@ -95,12 +93,12 @@ make cc-sdd-help
 # Run with your preferred agent/template
 make cc-sdd ARGS="--cursor --lang en --dry-run"
 ```
-The wrapper script calls (in order of preference):
+The wrapper script resolution:
 ```
-scripts/cc-sdd  # invokes /kiro/tools/cc-sdd/dist/cli.js
-# fallback: ../cc-sdd/tools/cc-sdd/dist/cli.js
+scripts/cc-sdd  # invokes ../cc-sdd/tools/cc-sdd/dist/cli.js
+# override via env: KIRO_CLI=/absolute/path/to/cli.js scripts/cc-sdd ...
 ```
-Ensure `/kiro` is installed per CC-SDD documentation, or have the sibling repo built for fallback.
+In chat/IDE: use the slash command forms (e.g., `/kiro/spec-init ...`). In terminal: use the wrapper above.
 
 ---
 
