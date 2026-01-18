@@ -3,3 +3,11 @@
 .DS_Store
 .venv/
 __pycache__/
+
+# System and IDE exclusions
+**/.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+.idea/
+*.pyc
